@@ -13,7 +13,9 @@ public class Main {
     public static void main(String[] args) {
         String json = readString("data.json");
         List<Employee> list = jsonToList(json);
-        System.out.println(list);
+        for (Employee employee : list) {
+            System.out.println(employee);
+        }
     }
 
     private static List<Employee> jsonToList(String json) {
@@ -24,8 +26,7 @@ public class Main {
         try {
             JSONArray jsonArray = (JSONArray) jp.parse(json);
             for (Object o : jsonArray) {
-                JSONObject jo = (JSONObject) o;
-                Employee emp = gson.fromJson(String.valueOf(jo), Employee.class);
+                Employee emp = gson.fromJson(String.valueOf(o), Employee.class);
                 list.add(emp);
             }
         } catch (ParseException ex) {
